@@ -18,9 +18,9 @@
             
             <!-- Кнопки для управления метрами -->
             <VerticalStackLayout Spacing="5">
-                <Label Text="Meters:" FontSize="12" FontAttributes="Bold"/>
+                <Label Text="Meters:" FontSize="12" FontAttributes="Bold" TextColor="Black"/>
                 <HorizontalStackLayout Spacing="5">
-                    <Button x:Name="DecreaseBtn" 
+                    <Button x:Name="IncreaseBtn" 
                             Text="-" 
                             Clicked="OnDecreaseMeters"
                             Padding="10"
@@ -28,7 +28,7 @@
                             BackgroundColor="#FF6B6B"
                             TextColor="White"
                             WidthRequest="50"/>
-                    <Button x:Name="IncreaseBtn" 
+                    <Button x:Name="DecreaseBtn" 
                             Text="+" 
                             Clicked="OnIncreaseMeters"
                             Padding="10"
@@ -44,7 +44,7 @@
 
             <!-- Кнопки для управления зумом -->
             <VerticalStackLayout Spacing="5">
-                <Label Text="Zoom:" FontSize="12" FontAttributes="Bold"/>
+                <Label Text="Zoom:" FontSize="12" FontAttributes="Bold" TextColor="Black"/>
                 <HorizontalStackLayout Spacing="5">
                     <Button x:Name="ZoomOutBtn" 
                             Text="−" 
