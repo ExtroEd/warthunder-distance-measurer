@@ -10,7 +10,7 @@ public class GameDrawable : IDrawable
     float _width;
     float _height;
     float _playSize;
-    readonly float _uiHeight = 60;
+    readonly float _uiHeight = 100;
 
     float CellSize => _playSize / GridSize / _zoom;
 
@@ -20,7 +20,7 @@ public class GameDrawable : IDrawable
     string _metersStr = "200";
     float _zoom = 1f;
     const float MinZoom = 0.5f;
-    const float MaxZoom = 3f;
+    const float MaxZoom = 1f;
 
     Vector2 _mousePos;
 
@@ -96,7 +96,7 @@ public class GameDrawable : IDrawable
         canvas.DrawString(
             metersText,
             10,
-            _playSize + 10,
+            _playSize + 35,
             HorizontalAlignment.Left
         );
 
@@ -105,7 +105,7 @@ public class GameDrawable : IDrawable
         canvas.DrawString(
             distText,
             10,
-            _playSize + 30,
+            _playSize + 60,
             HorizontalAlignment.Left
         );
 
@@ -115,7 +115,7 @@ public class GameDrawable : IDrawable
         canvas.DrawString(
             $"Zoom: {_zoom:F1}x",
             _width - 100,
-            _playSize + 15,
+            _playSize + 40,
             HorizontalAlignment.Left
         );
     }
@@ -210,13 +210,13 @@ public class GameDrawable : IDrawable
     // Увеличить зум
     public void ZoomIn()
     {
-        _zoom = Math.Min(_zoom + 0.2f, MaxZoom);
+        _zoom = Math.Min(_zoom + 0.1f, MaxZoom);
     }
 
     // Уменьшить зум
     public void ZoomOut()
     {
-        _zoom = Math.Max(_zoom - 0.2f, MinZoom);
+        _zoom = Math.Max(_zoom - 0.1f, MinZoom);
     }
 
     // Сброс зума
