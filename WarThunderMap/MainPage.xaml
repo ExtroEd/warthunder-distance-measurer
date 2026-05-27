@@ -1,14 +1,79 @@
-﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WarThunderMap.MainPage">
 
-    <Grid>
-
+    <Grid RowDefinitions="*,Auto">
         <GraphicsView x:Name="CanvasView"
+                      Grid.Row="0"
                       StartInteraction="OnStart"
                       DragInteraction="OnDrag"
                       EndInteraction="OnEnd"/>
-               
+        
+        <!-- Панель управления с кнопками -->
+        <HorizontalStackLayout Grid.Row="1" 
+                               Padding="10" 
+                               Spacing="10"
+                               BackgroundColor="#F0F0F0">
+            
+            <!-- Кнопки для управления метрами -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Meters:" FontSize="12" FontAttributes="Bold"/>
+                <HorizontalStackLayout Spacing="5">
+                    <Button x:Name="DecreaseBtn" 
+                            Text="-" 
+                            Clicked="OnDecreaseMeters"
+                            Padding="10"
+                            CornerRadius="5"
+                            BackgroundColor="#FF6B6B"
+                            TextColor="White"
+                            WidthRequest="50"/>
+                    <Button x:Name="IncreaseBtn" 
+                            Text="+" 
+                            Clicked="OnIncreaseMeters"
+                            Padding="10"
+                            CornerRadius="5"
+                            BackgroundColor="#51CF66"
+                            TextColor="White"
+                            WidthRequest="50"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Разделитель -->
+            <BoxView WidthRequest="1" BackgroundColor="#CCCCCC" Margin="5,0"/>
+
+            <!-- Кнопки для управления зумом -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Zoom:" FontSize="12" FontAttributes="Bold"/>
+                <HorizontalStackLayout Spacing="5">
+                    <Button x:Name="ZoomOutBtn" 
+                            Text="−" 
+                            Clicked="OnZoomOut"
+                            Padding="10"
+                            CornerRadius="5"
+                            BackgroundColor="#4C6EF5"
+                            TextColor="White"
+                            WidthRequest="50"/>
+                    <Button x:Name="ResetZoomBtn" 
+                            Text="Reset" 
+                            Clicked="OnResetZoom"
+                            Padding="10"
+                            CornerRadius="5"
+                            BackgroundColor="#A78BFA"
+                            TextColor="White"/>
+                    <Button x:Name="ZoomInBtn" 
+                            Text="+" 
+                            Clicked="OnZoomIn"
+                            Padding="10"
+                            CornerRadius="5"
+                            BackgroundColor="#4C6EF5"
+                            TextColor="White"
+                            WidthRequest="50"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+        </HorizontalStackLayout>
+
     </Grid>
 
 </ContentPage>
