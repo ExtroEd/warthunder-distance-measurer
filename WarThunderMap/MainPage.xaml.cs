@@ -1,4 +1,4 @@
-﻿using Microsoft.Maui.Controls.PlatformConfiguration;
+using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Platform;
 
 namespace WarThunderMap;
@@ -32,6 +32,41 @@ public partial class MainPage
     void OnEnd(object sender, TouchEventArgs e)
     {
         _drawable.OnUp();
+        CanvasView.Invalidate();
+    }
+
+    // Обработчик кнопки увеличения метров
+    void OnIncreaseMeters(object sender, EventArgs e)
+    {
+        _drawable.IncreaseMeters();
+        CanvasView.Invalidate();
+    }
+
+    // Обработчик кнопки уменьшения метров
+    void OnDecreaseMeters(object sender, EventArgs e)
+    {
+        _drawable.DecreaseMeters();
+        CanvasView.Invalidate();
+    }
+
+    // Обработчик кнопки увеличения зума
+    void OnZoomIn(object sender, EventArgs e)
+    {
+        _drawable.ZoomIn();
+        CanvasView.Invalidate();
+    }
+
+    // Обработчик кнопки уменьшения зума
+    void OnZoomOut(object sender, EventArgs e)
+    {
+        _drawable.ZoomOut();
+        CanvasView.Invalidate();
+    }
+
+    // Обработчик кнопки сброса зума
+    void OnResetZoom(object sender, EventArgs e)
+    {
+        _drawable.ResetZoom();
         CanvasView.Invalidate();
     }
 }
