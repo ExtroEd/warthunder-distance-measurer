@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 
 namespace WarThunderMap;
 
@@ -12,12 +12,15 @@ public class GameDrawable : IDrawable
     float _playSize;
     readonly float _uiHeight = 60;
 
-    float CellSize => _playSize / GridSize;
+    float CellSize => _playSize / GridSize / _zoom;
 
     readonly List<Vector2> _points = [];
     int? _draggingIndex;
 
     string _metersStr = "200";
+    float _zoom = 1f;
+    const float MinZoom = 0.5f;
+    const float MaxZoom = 3f;
 
     Vector2 _mousePos;
 
@@ -86,12 +89,9 @@ public class GameDrawable : IDrawable
         }
 
         canvas.FontSize = 18;
-        canvas.FontColor = _isEditingMeters ? Colors.Yellow : Colors.Red;
+        canvas.FontColor = Colors.Red;
         
-        string metersText = $"Meters: {_metersStr}";
-
-        if (_isEditingMeters && _cursorVisible)
-            metersText += "_";
+        string metersText = $"Meters/cell: {_metersStr} м";
 
         canvas.DrawString(
             metersText,
@@ -106,6 +106,16 @@ public class GameDrawable : IDrawable
             distText,
             10,
             _playSize + 30,
+            HorizontalAlignment.Left
+        );
+
+        // Отображение уровня зума
+        canvas.FontColor = Colors.Black;
+        canvas.FontSize = 14;
+        canvas.DrawString(
+            $"Zoom: {_zoom:F1}x",
+            _width - 100,
+            _playSize + 15,
             HorizontalAlignment.Left
         );
     }
@@ -176,5 +186,42 @@ public class GameDrawable : IDrawable
     public void SetMeters(string value)
     {
         _metersStr = value;
+    }
+
+    // Увеличить размер клеток на 25 м
+    public void IncreaseMeters()
+    {
+        if (int.TryParse(_metersStr, out int current))
+        {
+            _metersStr = (current + 25).ToString();
+        }
+    }
+
+    // Уменьшить размер клеток на 25 м
+    public void DecreaseMeters()
+    {
+        if (int.TryParse(_metersStr, out int current))
+        {
+            int newValue = Math.Max(25, current - 25);
+            _metersStr = newValue.ToString();
+        }
+    }
+
+    // Увеличить зум
+    public void ZoomIn()
+    {
+        _zoom = Math.Min(_zoom + 0.2f, MaxZoom);
+    }
+
+    // Уменьшить зум
+    public void ZoomOut()
+    {
+        _zoom = Math.Max(_zoom - 0.2f, MinZoom);
+    }
+
+    // Сброс зума
+    public void ResetZoom()
+    {
+        _zoom = 1f;
     }
 }
